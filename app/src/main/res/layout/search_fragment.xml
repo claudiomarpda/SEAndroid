@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".SearchActivity">
+    tools:context=".search.SearchFragment">
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:layout_marginTop="32dp">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/search_subject_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="assunto" />
+            android:hint="@string/search_subject" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/search_location_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="local, bairro, cidade" />
+            android:hint="@string/search_location" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -46,10 +48,10 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/search_users_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="Buscar" />
+        android:text="@string/search_users" />
 
-</android.widget.LinearLayout>
+</LinearLayout>
