@@ -1,13 +1,13 @@
 package sea.com.seandroid.search;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import sea.com.seandroid.R;
 
@@ -22,6 +22,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private TextInputEditText mSearchSubject;
     private TextInputEditText mSearchLocation;
     private Button mSearchButton;
+    private TextView mSearchResult;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -33,7 +34,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
     @Override
     public void setPresenter(SearchContract.Presenter presenter) {
-        if(presenter == null) {
+        if (presenter == null) {
             throw new NullPointerException("Presenter null in " + this.getClass());
         }
         mPresenter = presenter;
@@ -59,6 +60,9 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         mSearchLocation = root.findViewById(R.id.search_location_text);
         mSearchButton = root.findViewById(R.id.search_users_button);
 
+        mSearchResult = root.findViewById(R.id.search_result_text);
+
+
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +81,11 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     @Override
     public void hideSearchWidgets() {
         setSearchWidgetsVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showNetworkingResult(String result) {
+        mSearchResult.setText(result);
     }
 
     private void setSearchWidgetsVisibility(int visibility) {

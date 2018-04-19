@@ -10,6 +10,8 @@ public interface SearchContract {
         void showSearchWidgets();
 
         void hideSearchWidgets();
+
+        void showNetworkingResult(String result);
     }
 
     interface Presenter extends BasePresenter {

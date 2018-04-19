@@ -8,7 +8,8 @@ public class User extends Person {
     private String id;
     private List<Knowledge> knowledgeList = new ArrayList<>();
 
-    public User() {}
+    public User() {
+    }
 
     public User(String firstName, String lastName) {
         super(firstName, lastName);

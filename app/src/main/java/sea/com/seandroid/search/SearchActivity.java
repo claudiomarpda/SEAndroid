@@ -1,9 +1,10 @@
 package sea.com.seandroid.search;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import sea.com.seandroid.R;
+import sea.com.seandroid.data.source.remote.UserRemoteDataSource;
 import sea.com.seandroid.util.ActivityUtils;
 
 public class SearchActivity extends AppCompatActivity {
@@ -16,12 +17,12 @@ public class SearchActivity extends AppCompatActivity {
         SearchFragment searchFragment = (SearchFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_frame);
 
-        if(searchFragment == null) {
+        if (searchFragment == null) {
             searchFragment = SearchFragment.newInstance();
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), searchFragment, R.id.content_frame);
         }
 
-        new SearchPresenter(searchFragment);
+        new SearchPresenter(searchFragment, UserRemoteDataSource.getInstance());
     }
 }

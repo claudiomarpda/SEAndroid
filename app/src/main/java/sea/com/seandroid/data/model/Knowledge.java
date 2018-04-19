@@ -2,23 +2,22 @@ package sea.com.seandroid.data.model;
 
 public class Knowledge {
 
-    private String id;
+    private String title;
     private String description;
 
     public Knowledge() {
     }
 
-    public Knowledge(String id, String description) {
-        this.id = id;
+    public Knowledge(String title, String description) {
         this.description = description;
     }
 
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -32,7 +31,7 @@ public class Knowledge {
     @Override
     public String toString() {
         return "Knowledge{" +
-                "id='" + id + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
