@@ -1,8 +1,10 @@
 package sea.com.seandroid.search;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,11 +48,6 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     public void onResume() {
         super.onResume();
         mSearchPresenter.start();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override

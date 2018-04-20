@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp">
+    android:layout_marginTop="12dp">
 
     <ImageView
         android:id="@+id/search_user_image"
@@ -60,13 +60,13 @@
         android:textSize="18sp" />
 
     <View
-        android:id="@+id/vw_divider"
+        android:id="@+id/search_result_divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_alignLeft="@+id/search_user_name"
         android:layout_alignStart="@+id/search_user_name"
-        android:layout_below="@+id/search_user_knowledge"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/search_user_location"
+        android:layout_marginTop="12dp"
         android:background="@color/divider" />
 
 </RelativeLayout>

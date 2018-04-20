@@ -13,6 +13,7 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
     private final SearchContract.View mSearchView;
     private UserDataSource userDataSource;
 
+
     SearchPresenter(@NonNull SearchContract.View mSearchView, UserDataSource userDataSource) {
         this.mSearchView = mSearchView;
         mSearchView.setPresenter(this);

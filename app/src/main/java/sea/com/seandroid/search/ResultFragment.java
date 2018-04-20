@@ -47,10 +47,9 @@ public class ResultFragment extends Fragment implements ResultContract.View {
         View root = inflater.inflate(R.layout.search_result_fragment, container, false);
         mRecyclerView = root.findViewById(R.id.search_result_recycler_list);
 
-        if(mResultPresenter != null) {
+        if (mResultPresenter != null) {
             mResultPresenter.start();
-        }
-        else {
+        } else {
             assert getFragmentManager() != null;
             getFragmentManager().popBackStack();
         }
@@ -60,18 +59,6 @@ public class ResultFragment extends Fragment implements ResultContract.View {
     @Override
     public void loadList(List<User> list) {
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
         ResultListAdapter resultListAdapter = new ResultListAdapter(mResultPresenter, list);
