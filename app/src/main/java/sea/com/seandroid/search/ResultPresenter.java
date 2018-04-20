@@ -5,6 +5,7 @@ import android.view.View;
 import java.util.List;
 
 import sea.com.seandroid.data.model.User;
+import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
 
 public class ResultPresenter implements ResultContract.Presenter {
 
@@ -26,4 +27,5 @@ public class ResultPresenter implements ResultContract.Presenter {
     public void onItemSelected(View view, int position) {
         mResultView.showItemDetail(view, position);
     }
+
 }

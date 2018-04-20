@@ -1,17 +1,37 @@
 package sea.com.seandroid.data.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import sea.com.seandroid.util.KnowledgeTypeConverters;
+import sea.com.seandroid.util.StringTypeConverters;
+
+@Entity(tableName = "user")
 public class User extends Person {
 
-    private String id;
+    @Nullable
+    @TypeConverters(KnowledgeTypeConverters.class)
     private List<Knowledge> knowledgeList = new ArrayList<>();
+    @Nullable
+    @TypeConverters(StringTypeConverters.class)
     private List<String> frequentLocalList;
 
-    public User() {
+    /**
+     * Use this constructor to create a new Person with data from remote source
+     */
+    public User(@NonNull String id, String firstName, String lastName) {
+        super(id, firstName, lastName);
     }
 
+    @Nullable
+    @TypeConverter
     public List<String> getFrequentLocalList() {
         return frequentLocalList;
     }
@@ -20,6 +40,8 @@ public class User extends Person {
         this.frequentLocalList = frequentLocalList;
     }
 
+    @Nullable
+    @TypeConverter
     public List<Knowledge> getKnowledgeList() {
         return knowledgeList;
     }
@@ -28,20 +50,11 @@ public class User extends Person {
         this.knowledgeList = knowledgeList;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", knowledgeList=" + knowledgeList +
-                ", frequentLocalList='" + frequentLocalList + '\'' +
+                "knowledgeList=" + knowledgeList +
+                ", frequentLocalList=" + frequentLocalList +
                 '}';
     }
 }

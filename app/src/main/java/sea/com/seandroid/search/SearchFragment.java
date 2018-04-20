@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,15 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSearchPresenter.searchUsers();
+                boolean hasNetworking = ActivityUtils.hasNetworking(getContext());
+
+                if(hasNetworking) {
+                    mSearchPresenter.searchUsersRemote();
+                }
+                else {
+                    Log.d("TAG", "no networking");
+                    mSearchPresenter.searchUsersLocal();
+                }
             }
         });
         return root;

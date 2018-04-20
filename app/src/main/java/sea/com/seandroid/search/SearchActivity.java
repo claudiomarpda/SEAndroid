@@ -5,8 +5,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import sea.com.seandroid.Injection;
 import sea.com.seandroid.R;
-import sea.com.seandroid.data.source.remote.UserRemoteDataSource;
 import sea.com.seandroid.util.ActivityUtils;
 
 public class SearchActivity extends AppCompatActivity {
@@ -20,9 +20,9 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.search_toolbar);
         toolbar.setTitle(getResources().getString(R.string.search_users));
         setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
+//        ActionBar ab = getSupportActionBar();
+//        ab.setDisplayHomeAsUpEnabled(true);
+//        ab.setDisplayShowHomeEnabled(true);
 
         SearchFragment searchFragment = (SearchFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_frame);
@@ -34,7 +34,8 @@ public class SearchActivity extends AppCompatActivity {
                     getSupportFragmentManager(), searchFragment, R.id.content_frame, false);
         }
 
-        new SearchPresenter(searchFragment, UserRemoteDataSource.getInstance());
+        new SearchPresenter(searchFragment,
+                Injection.provideUserRepository(getApplicationContext()));
     }
 
     @Override

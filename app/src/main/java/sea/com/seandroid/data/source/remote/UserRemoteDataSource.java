@@ -1,8 +1,5 @@
 package sea.com.seandroid.data.source.remote;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,4 +46,10 @@ public class UserRemoteDataSource implements UserDataSource {
             }
         });
     }
+
+    @Override
+    public List<User> readAll() {
+        return null;
+    }
+
 }

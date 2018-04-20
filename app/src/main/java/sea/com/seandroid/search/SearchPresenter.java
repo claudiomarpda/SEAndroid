@@ -12,17 +12,12 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
 
     private final SearchContract.View mSearchView;
     private UserDataSource userDataSource;
-
+    private List<User> list;
 
     SearchPresenter(@NonNull SearchContract.View mSearchView, UserDataSource userDataSource) {
         this.mSearchView = mSearchView;
         mSearchView.setPresenter(this);
         this.userDataSource = userDataSource;
-    }
-
-    @Override
-    public void searchUsers() {
-        userDataSource.readAll(this);
     }
 
     @Override
@@ -35,4 +30,19 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
         mSearchView.replaceWithResultFragment(users);
     }
 
+    @Override
+    public void searchUsersRemote() {
+        userDataSource.readAll(this);
+    }
+
+    @Override
+    public void searchUsersLocal() {
+        list = userDataSource.readAll();
+        replaceFromLocal(list);
+    }
+
+    @Override
+    public void replaceFromLocal(List<User> list) {
+        mSearchView.replaceWithResultFragment(list);
+    }
 }
