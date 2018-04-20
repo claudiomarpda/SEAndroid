@@ -8,7 +8,14 @@
     android:paddingRight="16dp"
     tools:context=".search.SearchFragment">
 
+    <RelativeLayout
+        android:id="@+id/search_result_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/search_location_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
@@ -23,6 +30,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/search_subject_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center">
@@ -53,11 +61,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="@string/search_users" />
-
-    <TextView
-        android:id="@+id/search_result_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </LinearLayout>

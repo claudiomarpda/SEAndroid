@@ -1,17 +1,16 @@
 package sea.com.seandroid.search;
 
+import java.util.List;
+
 import sea.com.seandroid.BasePresenter;
 import sea.com.seandroid.BaseView;
+import sea.com.seandroid.data.model.User;
 
 public interface SearchContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showSearchWidgets();
-
-        void hideSearchWidgets();
-
-        void showNetworkingResult(String result);
+        void replaceWithResultFragment(List<User> list);
     }
 
     interface Presenter extends BasePresenter {

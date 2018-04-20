@@ -2,6 +2,7 @@ package sea.com.seandroid.search;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.data.source.remote.UserRemoteDataSource;
@@ -20,9 +21,11 @@ public class SearchActivity extends AppCompatActivity {
         if (searchFragment == null) {
             searchFragment = SearchFragment.newInstance();
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), searchFragment, R.id.content_frame);
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), searchFragment, R.id.content_frame, false);
         }
 
         new SearchPresenter(searchFragment, UserRemoteDataSource.getInstance());
     }
+
 }

@@ -1,7 +1,6 @@
 package sea.com.seandroid.search;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
     private final SearchContract.View mSearchView;
     private UserDataSource userDataSource;
 
-    public SearchPresenter(@NonNull SearchContract.View mSearchView, UserDataSource userDataSource) {
+    SearchPresenter(@NonNull SearchContract.View mSearchView, UserDataSource userDataSource) {
         this.mSearchView = mSearchView;
         mSearchView.setPresenter(this);
         this.userDataSource = userDataSource;
@@ -27,16 +26,12 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
 
     @Override
     public void start() {
-        mSearchView.showSearchWidgets();
+
     }
 
     @Override
     public void onReadAll(List<User> users) {
-        String result = "";
-        for (User u : users) {
-            result += u.getFirstName();
-            Log.d("TAG", "User " + u.getFirstName());
-        }
-        mSearchView.showNetworkingResult(result);
+        mSearchView.replaceWithResultFragment(users);
     }
+
 }

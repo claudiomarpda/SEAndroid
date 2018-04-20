@@ -7,17 +7,25 @@ public class User extends Person {
 
     private String id;
     private List<Knowledge> knowledgeList = new ArrayList<>();
+    private List<String> frequentLocalList;
 
     public User() {
     }
 
-    public User(String firstName, String lastName) {
-        super(firstName, lastName);
+    public List<String> getFrequentLocalList() {
+        return frequentLocalList;
     }
 
-    public User(String firstName, String lastName, String id) {
-        super(firstName, lastName);
-        this.id = id;
+    public void setFrequentLocalList(List<String> frequentLocalList) {
+        this.frequentLocalList = frequentLocalList;
+    }
+
+    public List<Knowledge> getKnowledgeList() {
+        return knowledgeList;
+    }
+
+    public void setKnowledgeList(List<Knowledge> knowledgeList) {
+        this.knowledgeList = knowledgeList;
     }
 
     public String getId() {
@@ -33,6 +41,7 @@ public class User extends Person {
         return "User{" +
                 "id='" + id + '\'' +
                 ", knowledgeList=" + knowledgeList +
+                ", frequentLocalList='" + frequentLocalList + '\'' +
                 '}';
     }
 }
