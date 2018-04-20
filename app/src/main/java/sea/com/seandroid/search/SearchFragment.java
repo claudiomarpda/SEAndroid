@@ -13,7 +13,6 @@ import java.util.List;
 import sea.com.seandroid.R;
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.util.ActivityUtils;
-import sea.com.seandroid.util.JsonUtils;
 
 /**
  * Use the {@link SearchFragment#newInstance} factory method to
@@ -21,7 +20,7 @@ import sea.com.seandroid.util.JsonUtils;
  */
 public class SearchFragment extends Fragment implements SearchContract.View {
 
-    private SearchContract.Presenter mPresenter;
+    private SearchContract.Presenter mSearchPresenter;
 
     private TextInputEditText mSearchSubject;
     private TextInputEditText mSearchLocation;
@@ -40,13 +39,13 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         if (presenter == null) {
             throw new NullPointerException("Presenter null in " + this.getClass());
         }
-        mPresenter = presenter;
+        mSearchPresenter = presenter;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        mSearchPresenter.start();
     }
 
     @Override
@@ -66,7 +65,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.searchUsers();
+                mSearchPresenter.searchUsers();
             }
         });
         return root;
@@ -74,9 +73,16 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
     @Override
     public void replaceWithResultFragment(List<User> list) {
-        String jsonString = JsonUtils.listToJsonString(list);
-        SearchResultFragment frag = SearchResultFragment.newInstance(jsonString);
-        ActivityUtils.addFragmentToActivity(getFragmentManager(), frag, R.id.search_result_container, true);
+        ResultFragment frag = (ResultFragment)
+                getFragmentManager().findFragmentById(R.id.search_result_container);
+
+        if (frag == null) {
+            frag = ResultFragment.newInstance();
+            new ResultPresenter(frag, list);
+            ActivityUtils.addFragmentToActivity(
+                    getFragmentManager(), frag, R.id.search_result_container, true);
+        }
+
     }
 
 }
