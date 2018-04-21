@@ -1,4 +1,4 @@
-package sea.com.seandroid.search;
+package sea.com.seandroid.search_result;
 
 import android.os.SystemClock;
 import android.support.annotation.NonNull;

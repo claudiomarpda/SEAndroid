@@ -1,10 +1,8 @@
 package sea.com.seandroid.search;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,8 @@ import java.util.List;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.data.model.User;
+import sea.com.seandroid.search_result.ResultFragment;
+import sea.com.seandroid.search_result.ResultPresenter;
 import sea.com.seandroid.util.ActivityUtils;
 
 /**

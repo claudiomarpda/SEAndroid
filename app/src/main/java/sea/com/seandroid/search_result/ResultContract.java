@@ -1,4 +1,4 @@
-package sea.com.seandroid.search;
+package sea.com.seandroid.search_result;
 
 import java.util.List;
 
