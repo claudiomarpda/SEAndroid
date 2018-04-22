@@ -1,7 +1,10 @@
 package sea.com.seandroid.data.source.local;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -10,9 +13,22 @@ import sea.com.seandroid.data.model.User;
 @Dao
 public interface UserDao extends PersonDao {
 
+    @Insert
+    void create(User u);
+
+    @Query("SELECT * FROM user WHERE id IN (:id)")
+    User read(String id);
+
+    @Update
+    void update(User u);
+
+    @Delete
+    void delete(User user);
+
     /**
      * Read all users
      */
     @Query("SELECT * FROM user")
-    List<User> readUsers();
+    List<User> readAll();
+
 }
