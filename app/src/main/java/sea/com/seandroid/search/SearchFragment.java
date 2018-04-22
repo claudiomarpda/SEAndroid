@@ -64,14 +64,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
             @Override
             public void onClick(View view) {
                 boolean hasNetworking = ActivityUtils.hasNetworking(getContext());
-
-                if(hasNetworking) {
-                    mSearchPresenter.searchUsersRemote();
-                }
-                else {
-                    Log.d("TAG", "no networking");
-                    mSearchPresenter.searchUsersLocal();
-                }
+                mSearchPresenter.searchUsers(hasNetworking);
             }
         });
         return root;

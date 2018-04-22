@@ -1,7 +1,5 @@
 package sea.com.seandroid.search;
 
-import android.content.Context;
-
 import java.util.List;
 
 import sea.com.seandroid.BasePresenter;
@@ -18,10 +16,7 @@ public interface SearchContract {
 
     interface Presenter extends BasePresenter {
 
-        void searchUsersRemote();
+        void searchUsers(boolean hasNetworking);
 
-        void searchUsersLocal();
-
-        void replaceFromLocal(List<User> list);
     }
 }

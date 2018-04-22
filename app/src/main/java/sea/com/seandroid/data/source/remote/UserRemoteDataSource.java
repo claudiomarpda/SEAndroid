@@ -28,7 +28,7 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void readAll(final OnUserDataLoaded data) {
+    public void readAll(boolean hasNetworking, final OnUserDataLoaded data) {
         userClient.readAll().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -45,11 +45,6 @@ public class UserRemoteDataSource implements UserDataSource {
                 call.cancel();
             }
         });
-    }
-
-    @Override
-    public List<User> readAll() {
-        return null;
     }
 
 }

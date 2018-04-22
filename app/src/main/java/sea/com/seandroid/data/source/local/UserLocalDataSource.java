@@ -1,11 +1,12 @@
 package sea.com.seandroid.data.source.local;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
@@ -16,13 +17,12 @@ public class UserLocalDataSource implements UserDataSource {
     private static volatile UserLocalDataSource instance;
 
     private UserDao userDao;
-    private List<User> list;
-    private Semaphore semaphore = new Semaphore(0);
 
     private Executor executor = Executors.newFixedThreadPool(1);
 
     private UserLocalDataSource(UserDao userDao) {
         this.userDao = userDao;
+
     }
 
     public static UserLocalDataSource getInstance(UserDao userDao) {
@@ -36,33 +36,24 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void readAll(OnUserDataLoaded data) {
-
-    }
-
-    @Override
-    public List<User> readAll() {
-        new LocalDataSourceAsync().executeOnExecutor(executor);
-//        try {
-//            semaphore.acquire();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        return list;
+    public void readAll(boolean hasNetworking, OnUserDataLoaded data) {
+        try {
+            data.onReadAll(new LocalDataSourceAsync().executeOnExecutor(executor).get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.d("TAG", "read all finished");
     }
 
     private class LocalDataSourceAsync extends AsyncTask<Void, Void, List<User>> {
 
         @Override
         protected List<User> doInBackground(Void... voids) {
-            return userDao.readUsers();
+            Log.d("TAG", "in background local");
+            return userDao.readAll();
         }
 
-        @Override
-        protected void onPostExecute(List<User> users) {
-            super.onPostExecute(users);
-            list = users;
-//            semaphore.release();
-        }
     }
 }

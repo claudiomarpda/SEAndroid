@@ -14,9 +14,8 @@ public class UserRepository implements UserDataSource {
 
     private static UserRepository instance;
 
-    private final UserRemoteDataSource mUserRemoteDataSource;
-
-    private final UserLocalDataSource mUserLocalDataSource;
+    private final UserDataSource mUserRemoteDataSource;
+    private final UserDataSource mUserLocalDataSource;
 
     public UserRepository(@NonNull UserRemoteDataSource remote,
                           @NonNull UserLocalDataSource local) {
@@ -33,13 +32,15 @@ public class UserRepository implements UserDataSource {
     }
 
     @Override
-    public void readAll(OnUserDataLoaded data) {
-        mUserRemoteDataSource.readAll(data);
-    }
-
-    @Override
-    public List<User> readAll() {
-        return mUserLocalDataSource.readAll();
+    public void readAll(boolean hasNetworking, OnUserDataLoaded data) {
+        if(hasNetworking) {
+            mUserRemoteDataSource.readAll(hasNetworking, data);
+            Log.d("TAG", "search remote");
+        }
+        else {
+            mUserLocalDataSource.readAll(hasNetworking, data);
+            Log.d("TAG", "search local");
+        }
     }
 
 }
