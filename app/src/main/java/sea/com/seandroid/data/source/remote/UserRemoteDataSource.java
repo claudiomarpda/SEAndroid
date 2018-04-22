@@ -47,4 +47,9 @@ public class UserRemoteDataSource implements UserDataSource {
         });
     }
 
+    @Override
+    public void create(User u) {
+
+    }
+
 }

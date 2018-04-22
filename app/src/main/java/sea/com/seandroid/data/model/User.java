@@ -1,7 +1,6 @@
 package sea.com.seandroid.data.model;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -10,17 +9,17 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import sea.com.seandroid.util.KnowledgeTypeConverters;
-import sea.com.seandroid.util.StringTypeConverters;
+import sea.com.seandroid.util.KnowledgeTypeConverter;
+import sea.com.seandroid.util.StringTypeConverter;
 
 @Entity(tableName = "user")
 public class User extends Person {
 
     @Nullable
-    @TypeConverters(KnowledgeTypeConverters.class)
+    @TypeConverters(KnowledgeTypeConverter.class)
     private List<Knowledge> knowledgeList = new ArrayList<>();
     @Nullable
-    @TypeConverters(StringTypeConverters.class)
+    @TypeConverters(StringTypeConverter.class)
     private List<String> frequentLocalList;
 
     /**

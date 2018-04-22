@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import sea.com.seandroid.data.model.Knowledge;
 import sea.com.seandroid.data.model.User;

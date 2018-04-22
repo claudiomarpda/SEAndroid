@@ -9,24 +9,25 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-public class StringTypeConverters {
+import sea.com.seandroid.data.model.Knowledge;
+
+public class KnowledgeTypeConverter {
 
     private static Gson gson = new Gson();
 
     @TypeConverter
-    public static List<String> stringToStringList(String data) {
+    public static List<Knowledge> stringToKnowledgeList(String data) {
         if (data == null) {
             return Collections.emptyList();
         }
 
-        Type listType = new TypeToken<List<List>>() {
-        }.getType();
+        Type listType = new TypeToken<List<Knowledge>>() {}.getType();
 
         return gson.fromJson(data, listType);
     }
 
     @TypeConverter
-    public static String stringListToString(List<String> stringList) {
-        return gson.toJson(stringList);
+    public static String knowledgeListToString(List<Knowledge> knowledgeList) {
+        return gson.toJson(knowledgeList);
     }
 }
