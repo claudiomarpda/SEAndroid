@@ -1,8 +1,8 @@
-package sea.com.seandroid.tab;
+package sea.com.seandroid.page;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,23 +10,27 @@ import android.view.MenuItem;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.search.SearchActivity;
+import sea.com.seandroid.util.ActivityUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class PageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.page_activity);
 
         // Set up the toolbar.
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.page_toolbar);
         toolbar.setTitle("Principal");
         setSupportActionBar(toolbar);
+
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                PageTabFragment.newInstance(), R.id.main_content_frame, false);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
 
             case R.id.action_search:
                 Intent i = new Intent(this, SearchActivity.class);
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_tab, menu);
+        inflater.inflate(R.menu.tab_action, menu);
         return true;
     }
 }

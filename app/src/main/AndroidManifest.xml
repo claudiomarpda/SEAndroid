@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".tab.MainActivity">
+        <activity android:name=".page.PageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,12 +22,12 @@
         </activity>
         <activity
             android:name=".search.SearchActivity"
-            android:parentActivityName=".tab.MainActivity"
+            android:parentActivityName=".page.PageActivity"
             tools:targetApi="jelly_bean" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="tab.MainActivity" />
+            android:value=".page.PageActivity" />
     </application>
 
 </manifest>
