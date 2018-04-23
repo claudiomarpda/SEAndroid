@@ -35,7 +35,7 @@ public class UserDaoTest {
         // Using an in-memory database because the information stored here disappears when the
         // process is killed.
         mDb = Room.inMemoryDatabaseBuilder(context, SEADatabase.class)
-                // Allowing main thread queries, just for testing.
+                // Allowing action_tab thread queries, just for testing.
                 .allowMainThreadQueries()
                 .build();
         mUserDao = mDb.userDao();

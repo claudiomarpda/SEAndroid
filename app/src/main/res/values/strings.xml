@@ -6,4 +6,6 @@
     <string name="search_subject">assunto</string>
     <string name="search_location">local, bairro, cidade</string>
     <string name="search_result">Usuários</string>
+    <string name="action_search">Pesquisar</string>
+
 </resources>
