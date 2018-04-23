@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/page_toolbar" />
+
+        </FrameLayout
+>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/page_tab_layout"
             android:layout_width="match_parent"

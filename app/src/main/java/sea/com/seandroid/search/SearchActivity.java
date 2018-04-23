@@ -20,9 +20,9 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.search_toolbar);
         toolbar.setTitle(getResources().getString(R.string.search_users));
         setSupportActionBar(toolbar);
-//        ActionBar ab = getSupportActionBar();
-//        ab.setDisplayHomeAsUpEnabled(true);
-//        ab.setDisplayShowHomeEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
 
         SearchFragment searchFragment = (SearchFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_frame);

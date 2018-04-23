@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,14 @@ import android.view.ViewGroup;
 import sea.com.seandroid.R;
 
 public class PageTabFragment extends Fragment {
+
+    private static final int[] PAGE_NAMES = {
+            R.string.page_contacts,
+            R.string.page_notifications,
+            R.string.page_knowledge,
+            R.string.page_locations,
+            R.string.page_profile
+    };
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -30,15 +40,46 @@ public class PageTabFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.page_tab_fragment, container, false);
 
+        final Toolbar toolbar = root.findViewById(R.id.page_toolbar);
+        toolbar.setTitle(PAGE_NAMES[0]);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
         mViewPager = root.findViewById(R.id.page_viewpager);
         mTabLayout = root.findViewById(R.id.page_tab_layout);
 
         mPagesAdapter = new PageAdapter(getChildFragmentManager());
-        mPagesAdapter.addFragment(PageProfileFragment.newInstance(), getString(R.string.page_profile));
-        mPagesAdapter.addFragment(PageKnowledgeFragment.newInstance(), getString(R.string.page_knowledge));
+        mPagesAdapter.addFragment(PageContactsFragment.newInstance());
+        mPagesAdapter.addFragment(PageNotificationFragment.newInstance());
+        mPagesAdapter.addFragment(PageKnowledgeFragment.newInstance());
+        mPagesAdapter.addFragment(PageLocationFragment.newInstance());
+        mPagesAdapter.addFragment(PageProfileFragment.newInstance());
 
         mViewPager.setAdapter(mPagesAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_account_multiple);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.ic_bell);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_book_open_page_variant);
+        mTabLayout.getTabAt(3).setIcon(R.drawable.ic_map_marker);
+        mTabLayout.getTabAt(4).setIcon(R.drawable.ic_account_circle);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                toolbar.setTitle(PAGE_NAMES[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         return root;
     }
 

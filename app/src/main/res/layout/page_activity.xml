@@ -7,14 +7,6 @@
     tools:context=".page.PageActivity">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/page_toolbar" />
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/main_content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

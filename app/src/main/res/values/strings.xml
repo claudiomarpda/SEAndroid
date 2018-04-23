@@ -7,7 +7,10 @@
     <string name="search_location">local, bairro, cidade</string>
     <string name="search_result">Usuários</string>
     <string name="action_search">Pesquisar</string>
+    <string name="page_contacts">Contatos</string>
+    <string name="page_notifications">Notificações</string>
+    <string name="page_knowledge">Conhecimentos</string>
+    <string name="page_locations">Lugares</string>
     <string name="page_profile">Perfil</string>
-    <string name="page_knowledge">Conhecimento</string>
 
 </resources>
