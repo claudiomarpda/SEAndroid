@@ -12,5 +12,14 @@
     <string name="page_knowledge">Conhecimentos</string>
     <string name="page_locations">Lugares</string>
     <string name="page_profile">Perfil</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Fazer login</string>
+    <string name="error_invalid_login">Email ou senha inválidos</string>
+    <string name="error_field_required">Este campo é necessário</string>
 
 </resources>

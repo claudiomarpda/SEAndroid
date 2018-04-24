@@ -14,7 +14,7 @@ import sea.com.seandroid.data.model.User;
 public interface UserDao extends PersonDao {
 
     @Insert
-    void create(User u);
+    void insert(User u);
 
     @Query("SELECT * FROM user WHERE id IN (:id)")
     User read(String id);
@@ -25,10 +25,9 @@ public interface UserDao extends PersonDao {
     @Delete
     void delete(User user);
 
-    /**
-     * Read all users
-     */
     @Query("SELECT * FROM user")
     List<User> readAll();
 
+    @Query("SELECT * FROM user WHERE id in (:email)")
+    User findByEmail(String email);
 }

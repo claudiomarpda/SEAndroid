@@ -1,11 +1,13 @@
 package sea.com.seandroid.data.source;
 
 import sea.com.seandroid.data.model.User;
-import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
+import sea.com.seandroid.data.source.remote.OnUserLoaded;
 
 public interface UserDataSource {
 
-    void readAll(boolean hasNetworking, OnUserDataLoaded data);
+    void findAll(boolean hasNetworking, OnUserLoaded.OnReadAll data);
 
-    void create(User u);
+    void insert(User u);
+
+    void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data);
 }

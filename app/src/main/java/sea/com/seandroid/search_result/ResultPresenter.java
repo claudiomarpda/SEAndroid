@@ -5,9 +5,9 @@ import android.view.View;
 import java.util.List;
 
 import sea.com.seandroid.data.model.User;
-import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
+import sea.com.seandroid.data.source.remote.OnUserLoaded;
 
-public class ResultPresenter implements ResultContract.Presenter, OnUserDataLoaded {
+public class ResultPresenter implements ResultContract.Presenter, OnUserLoaded.OnReadAll {
 
     private ResultContract.View mResultView;
     private List<User> userList;
@@ -32,4 +32,5 @@ public class ResultPresenter implements ResultContract.Presenter, OnUserDataLoad
     public void onReadAll(List<User> users) {
         mResultView.loadList(users);
     }
+
 }

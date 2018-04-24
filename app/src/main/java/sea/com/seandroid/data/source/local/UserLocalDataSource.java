@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
-import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
+import sea.com.seandroid.data.source.remote.OnUserLoaded;
 
 public class UserLocalDataSource implements UserDataSource {
 
@@ -36,9 +36,9 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void readAll(boolean hasNetworking, OnUserDataLoaded data) {
+    public void findAll(boolean hasNetworking, OnUserLoaded.OnReadAll data) {
         try {
-            data.onReadAll(new ReadUsersAsync().executeOnExecutor(executor).get());
+            data.onReadAll(new FindAllUsersAsync().executeOnExecutor(executor).get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -48,11 +48,23 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void create(User u) {
-        new CreateUserAsync().executeOnExecutor(executor, u);
+    public void insert(User u) {
+        new InsertUserAsync().executeOnExecutor(executor, u);
     }
 
-    private static class ReadUsersAsync extends AsyncTask<Void, Void, List<User>> {
+    @Override
+    public void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data) {
+        try {
+            data.onFindByEmail(
+                    new FindUserByEmailAsync().executeOnExecutor(executor, email).get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class FindAllUsersAsync extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
             Log.d("TAG", "in background local");
@@ -60,11 +72,18 @@ public class UserLocalDataSource implements UserDataSource {
         }
     }
 
-    private static class CreateUserAsync extends AsyncTask<User, Void, Void> {
+    private static class InsertUserAsync extends AsyncTask<User, Void, Void> {
         @Override
         protected Void doInBackground(User... users) {
-            userDao.create(users[0]);
+            userDao.insert(users[0]);
             return null;
+        }
+    }
+
+    private static class FindUserByEmailAsync extends AsyncTask<String, Void, User> {
+        @Override
+        protected User doInBackground(String... strings) {
+            return userDao.findByEmail(strings[0]);
         }
     }
 }

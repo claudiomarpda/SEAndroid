@@ -1,15 +1,14 @@
 package sea.com.seandroid.search;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
-import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
+import sea.com.seandroid.data.source.remote.OnUserLoaded;
 
-public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoaded {
+public class SearchPresenter implements SearchContract.Presenter, OnUserLoaded.OnReadAll {
 
     private final SearchContract.View mSearchView;
     private UserDataSource userDataSource;
@@ -30,9 +29,10 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserDataLoad
         mSearchView.replaceWithResultFragment(users);
     }
 
+
     @Override
     public void searchUsers(boolean hasNetworking) {
-        userDataSource.readAll(hasNetworking, this);
+        userDataSource.findAll(hasNetworking, this);
     }
 
 }

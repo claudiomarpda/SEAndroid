@@ -1,13 +1,10 @@
 package sea.com.seandroid.data.source;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
-
-import java.util.List;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.local.UserLocalDataSource;
-import sea.com.seandroid.data.source.remote.OnUserDataLoaded;
+import sea.com.seandroid.data.source.remote.OnUserLoaded;
 import sea.com.seandroid.data.source.remote.UserRemoteDataSource;
 
 public class UserRepository implements UserDataSource {
@@ -32,20 +29,28 @@ public class UserRepository implements UserDataSource {
     }
 
     @Override
-    public void readAll(boolean hasNetworking, OnUserDataLoaded data) {
+    public void findAll(boolean hasNetworking, OnUserLoaded.OnReadAll data) {
         if(hasNetworking) {
-            mUserRemoteDataSource.readAll(hasNetworking, data);
-            Log.d("TAG", "search remote");
+            mUserRemoteDataSource.findAll(hasNetworking, data);
         }
         else {
-            mUserLocalDataSource.readAll(hasNetworking, data);
-            Log.d("TAG", "search local");
+            mUserLocalDataSource.findAll(hasNetworking, data);
         }
     }
 
     @Override
-    public void create(User u) {
-        mUserLocalDataSource.create(u);
+    public void insert(User u) {
+        mUserLocalDataSource.insert(u);
+    }
+
+    @Override
+    public void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data) {
+        if(hasNetworking) {
+            mUserRemoteDataSource.findByEmail(hasNetworking, email, data);
+        }
+        else {
+            mUserLocalDataSource.findByEmail(hasNetworking, email, data);
+        }
     }
 
 }

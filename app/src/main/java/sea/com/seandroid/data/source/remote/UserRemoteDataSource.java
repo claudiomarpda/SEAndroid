@@ -28,7 +28,7 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void readAll(boolean hasNetworking, final OnUserDataLoaded data) {
+    public void findAll(boolean hasNetworking, final OnUserLoaded.OnReadAll data) {
         userClient.readAll().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -48,8 +48,27 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void create(User u) {
+    public void insert(User u) {
 
+    }
+
+    @Override
+    public void findByEmail(boolean hasNetworking, final String email, final OnUserLoaded.OnFindByEmail data) {
+        userClient.findByEmail(email).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+                    if(response.body() != null) {
+                        data.onFindByEmail(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
 
 }
