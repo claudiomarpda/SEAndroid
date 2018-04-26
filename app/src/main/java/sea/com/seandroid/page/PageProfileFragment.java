@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.UserSession;
-import sea.com.seandroid.data.model.User;
 
 public class PageProfileFragment extends Fragment {
-
 
     public PageProfileFragment() {
         // Required empty public constructor
@@ -33,9 +31,9 @@ public class PageProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page_profile_fragment, container, false);
 
-        TextView textView = view.findViewById(R.id.page_profile_text);
+        TextView textView = view.findViewById(R.id.page_profile_name);
         if(UserSession.user != null) {
-            textView.setText(UserSession.user.toString());
+            textView.setText(UserSession.user.getFirstName() + " " + UserSession.user.getLastName());
         }
 
         return view;
