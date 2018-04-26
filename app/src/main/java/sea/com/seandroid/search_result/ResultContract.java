@@ -22,6 +22,5 @@ public interface ResultContract {
 
         void onItemSelected(android.view.View view, int position);
 
-//        List<User> loadFromLocalSource();
     }
 }

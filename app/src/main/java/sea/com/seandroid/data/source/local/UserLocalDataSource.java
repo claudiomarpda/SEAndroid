@@ -38,7 +38,7 @@ public class UserLocalDataSource implements UserDataSource {
     @Override
     public void findAll(boolean hasNetworking, OnUserLoaded.OnReadAll data) {
         try {
-            data.onReadAll(new FindAllUsersAsync().executeOnExecutor(executor).get());
+            data.onFindAll(new FindAllUsersAsync().executeOnExecutor(executor).get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

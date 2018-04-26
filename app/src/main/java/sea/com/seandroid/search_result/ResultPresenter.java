@@ -29,7 +29,7 @@ public class ResultPresenter implements ResultContract.Presenter, OnUserLoaded.O
     }
 
     @Override
-    public void onReadAll(List<User> users) {
+    public void onFindAll(List<User> users) {
         mResultView.loadList(users);
     }
 

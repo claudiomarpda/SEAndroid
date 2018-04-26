@@ -1,6 +1,5 @@
 package sea.com.seandroid.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,23 +13,23 @@ import android.support.v4.app.FragmentTransaction;
  */
 public class ActivityUtils {
 
-        public static void addFragmentToActivity (@NonNull FragmentManager fragmentManager,
-                                                  @NonNull Fragment fragment, int frameId,
-                                                  boolean addToStack) {
+    public static void setFragmentToActivity(@NonNull FragmentManager fragmentManager,
+                                             @NonNull Fragment fragment, int frameId,
+                                             boolean addToStack) {
 
-            if(fragmentManager == null || fragment == null) {
-                throw new NullPointerException("Fragment null in " + ActivityUtils.class);
-            }
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.add(frameId, fragment);
-            transaction.commit();
-
-            if(addToStack) {
-                transaction.addToBackStack(null); // Allows return to the last View onBackPressed
-            }
+        if (fragmentManager == null || fragment == null) {
+            throw new NullPointerException("Fragment null in " + ActivityUtils.class);
         }
+        FragmentTransaction t = fragmentManager.beginTransaction();
+        t.add(frameId, fragment);
+        t.commit();
 
-    public static boolean hasNetworking(Context context) {
+        if (addToStack) {
+            t.addToBackStack(null); // Allows return to the last View onBackPressed
+        }
+    }
+
+    public static boolean hasNetwork(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;

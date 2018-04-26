@@ -25,7 +25,7 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserLoaded.O
     }
 
     @Override
-    public void onReadAll(List<User> users) {
+    public void onFindAll(List<User> users) {
         mSearchView.replaceWithResultFragment(users);
     }
 

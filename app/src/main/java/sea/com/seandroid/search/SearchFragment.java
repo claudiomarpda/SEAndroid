@@ -3,7 +3,6 @@ package sea.com.seandroid.search;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean hasNetworking = ActivityUtils.hasNetworking(getContext());
+                boolean hasNetworking = ActivityUtils.hasNetwork(getContext());
                 mSearchPresenter.searchUsers(hasNetworking);
             }
         });
@@ -78,8 +77,8 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         if (frag == null) {
             frag = ResultFragment.newInstance();
             new ResultPresenter(frag, list);
-            ActivityUtils.addFragmentToActivity(
-                    getFragmentManager(), frag, R.id.search_result_container, true);
+            ActivityUtils.setFragmentToActivity(
+                    getFragmentManager(), frag, R.id.search_result_container,true);
         }
 
     }

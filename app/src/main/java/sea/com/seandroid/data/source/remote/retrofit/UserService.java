@@ -12,7 +12,7 @@ public interface UserService {
     @GET("all")
     Call<List<User>> readAll();
 
-    @GET("/email/{userEmail}")
-    Call<User> findByEmail(@Path("userEmail") String email);
+    @GET("email/{userEmail}")
+    Call<User> findByEmail(@Path("userEmail") String userEmail);
 
 }

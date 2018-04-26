@@ -3,7 +3,6 @@ package sea.com.seandroid.page;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,8 +18,17 @@ public class PageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_activity);
 
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                PageTabFragment.newInstance(), R.id.main_content_frame, false);
+        PageTabFragment pageTabFragment = (PageTabFragment)
+                getSupportFragmentManager().findFragmentById(R.id.pages_content_frame);
+
+        if(pageTabFragment == null) {
+            pageTabFragment = PageTabFragment.newInstance();
+
+            ActivityUtils.setFragmentToActivity(getSupportFragmentManager(),
+                    pageTabFragment, R.id.pages_content_frame, false);
+
+        }
+
     }
 
     @Override

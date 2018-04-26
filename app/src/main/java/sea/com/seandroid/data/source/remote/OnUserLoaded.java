@@ -7,7 +7,7 @@ import sea.com.seandroid.data.model.User;
 public interface OnUserLoaded {
 
     interface OnReadAll {
-        void onReadAll(List<User> users);
+        void onFindAll(List<User> users);
     }
 
     interface OnFindByEmail {

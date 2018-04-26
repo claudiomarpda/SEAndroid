@@ -1,5 +1,7 @@
 package sea.com.seandroid.data.source.remote;
 
+import android.util.Log;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,7 +37,7 @@ public class UserRemoteDataSource implements UserDataSource {
                 if (response.isSuccessful()) {
 
                     if (response.body() != null) {
-                        data.onReadAll(response.body());
+                        data.onFindAll(response.body());
                     }
                 }
             }

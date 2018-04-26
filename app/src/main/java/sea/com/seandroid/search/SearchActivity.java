@@ -25,13 +25,13 @@ public class SearchActivity extends AppCompatActivity {
         ab.setDisplayShowHomeEnabled(true);
 
         SearchFragment searchFragment = (SearchFragment)
-                getSupportFragmentManager().findFragmentById(R.id.content_frame);
+                getSupportFragmentManager().findFragmentById(R.id.search_content_frame);
 
         if (searchFragment == null) {
             searchFragment = SearchFragment.newInstance();
 
-            ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), searchFragment, R.id.content_frame, false);
+            ActivityUtils.setFragmentToActivity(
+                    getSupportFragmentManager(), searchFragment, R.id.search_content_frame, false);
         }
 
         new SearchPresenter(searchFragment,
