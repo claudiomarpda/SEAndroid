@@ -27,7 +27,8 @@ public class UserDaoTest {
     private SEADatabase mDb;
     private UserDao mUserDao;
 
-    private User user = new User("id01", "Name", "LastName");
+    private User user = new User(
+            "id01", "Name", "LastName", "example@email.com");
 
     @Before
     public void createDb() {
@@ -48,14 +49,14 @@ public class UserDaoTest {
 
     @Test
     public void createAndReadUserShouldSucceed() {
-        mUserDao.create(user);
+        mUserDao.insert(user);
         User u = mUserDao.read("id01");
         assertEquals(u.getFirstName(), user.getFirstName());
     }
 
     @Test
     public void updateShouldSucceed() {
-        mUserDao.create(user);
+        mUserDao.insert(user);
         assertEquals(mUserDao.read("id01").getFirstName(), user.getFirstName());
         user.setFirstName("updated name");
         mUserDao.update(user);
@@ -67,7 +68,7 @@ public class UserDaoTest {
 
     @Test
     public void deleteShouldSucceed() {
-        mUserDao.create(user);
+        mUserDao.insert(user);
         User u = mUserDao.read("id01");
         assertEquals(u.getFirstName(), user.getFirstName());
         mUserDao.delete(user);
@@ -79,7 +80,7 @@ public class UserDaoTest {
         Knowledge k1 = new Knowledge("k01", "Knowledge Title", "Knowledge description");
         Knowledge k2 = new Knowledge("k02", "Knowledge Title", "Knowledge description");
         user.setKnowledgeList(Arrays.asList(k1, k2));
-        mUserDao.create(user);
+        mUserDao.insert(user);
 
         User u = mUserDao.read("id01");
         assertNotNull(u.getKnowledgeList());

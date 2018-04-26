@@ -26,7 +26,7 @@ public class KnowledgeTypeConverterTest {
 
     @Test
     public void convertKnowledgeListToStringShouldSucceed() {
-        String s = KnowledgeTypeConverter.knowledgeListToString(knowledgeList);
+        String s = KnowledgeTypeConverter.objectListToString(knowledgeList);
         List<Knowledge> l = KnowledgeTypeConverter.stringToKnowledgeList(s);
         assertNotNull(l);
         assertEquals(knowledgeList.get(0).getId(), l.get(0).getId());

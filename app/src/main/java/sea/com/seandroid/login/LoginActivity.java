@@ -1,12 +1,9 @@
 package sea.com.seandroid.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +20,6 @@ import sea.com.seandroid.page.PageActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mLoginFormView;
@@ -61,14 +57,14 @@ public class LoginActivity extends AppCompatActivity {
     private void attemptLogin() {
         boolean authorized = false;
         try {
-            authorized = new UserLoginTask("myemail@gmail.com", "123").execute().get();
+            authorized = new UserLoginTask("example@email.com", "123").execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        if(authorized) {
+        if (authorized) {
             startMainActivity();
         }
     }

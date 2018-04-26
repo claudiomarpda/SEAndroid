@@ -26,7 +26,7 @@ public class StringTypeConverter {
     }
 
     @TypeConverter
-    public static String stringListToString(List<String> stringList) {
-        return gson.toJson(stringList);
+    public static String objectListToString(List<String> list) {
+        return gson.toJson(list);
     }
 }

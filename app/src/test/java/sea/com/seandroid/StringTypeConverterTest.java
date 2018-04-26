@@ -22,7 +22,7 @@ public class StringTypeConverterTest {
 
     @Test
     public void convertStringListToStringShouldSucceed() {
-        String s = StringTypeConverter.stringListToString(list);
+        String s = StringTypeConverter.objectListToString(list);
         List<String> l = StringTypeConverter.stringToStringList(s);
         assertNotNull(l);
         assertEquals(list.get(0), l.get(0));
