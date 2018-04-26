@@ -1,7 +1,5 @@
 package sea.com.seandroid.login;
 
-import android.util.Log;
-
 import sea.com.seandroid.UserSession;
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
@@ -20,7 +18,9 @@ public class LoginPresenter implements LoginContract.Presenter, OnUserLoaded.OnF
 
     @Override
     public void start() {
-
+        if (UserSession.user != null) {
+            mLoginView.showLoginAccepted();
+        }
     }
 
     @Override

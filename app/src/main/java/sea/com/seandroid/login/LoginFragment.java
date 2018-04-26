@@ -52,6 +52,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             }
         });
 
+        if(mLoginPresenter != null) {
+            mLoginPresenter.start();
+        }
+
         return view;
     }
 

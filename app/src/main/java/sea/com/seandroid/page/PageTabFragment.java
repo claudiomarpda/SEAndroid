@@ -18,8 +18,6 @@ public class PageTabFragment extends Fragment {
     private static final int[] PAGE_NAMES = {
             R.string.page_contacts,
             R.string.page_notifications,
-            R.string.page_knowledge,
-            R.string.page_locations,
             R.string.page_profile
     };
 
@@ -50,8 +48,6 @@ public class PageTabFragment extends Fragment {
         mPagesAdapter = new PageAdapter(getChildFragmentManager());
         mPagesAdapter.addFragment(PageContactsFragment.newInstance());
         mPagesAdapter.addFragment(PageNotificationFragment.newInstance());
-        mPagesAdapter.addFragment(PageKnowledgeFragment.newInstance());
-        mPagesAdapter.addFragment(PageLocationFragment.newInstance());
         mPagesAdapter.addFragment(PageProfileFragment.newInstance());
 
         mViewPager.setAdapter(mPagesAdapter);
@@ -59,9 +55,7 @@ public class PageTabFragment extends Fragment {
 
         mTabLayout.getTabAt(0).setIcon(R.drawable.ic_account_multiple);
         mTabLayout.getTabAt(1).setIcon(R.drawable.ic_bell);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_book_open_page_variant);
-        mTabLayout.getTabAt(3).setIcon(R.drawable.ic_map_marker);
-        mTabLayout.getTabAt(4).setIcon(R.drawable.ic_account_circle);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_account_circle);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
