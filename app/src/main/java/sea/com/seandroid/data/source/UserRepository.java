@@ -1,6 +1,7 @@
 package sea.com.seandroid.data.source;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.local.UserLocalDataSource;
@@ -13,8 +14,8 @@ public class UserRepository implements UserDataSource {
     private final UserDataSource mUserRemoteDataSource;
     private final UserDataSource mUserLocalDataSource;
 
-    public UserRepository(@NonNull UserRemoteDataSource remote,
-                          @NonNull UserLocalDataSource local) {
+    private UserRepository(@NonNull UserRemoteDataSource remote,
+                           @NonNull UserLocalDataSource local) {
         this.mUserRemoteDataSource = remote;
         this.mUserLocalDataSource = local;
     }
@@ -28,55 +29,56 @@ public class UserRepository implements UserDataSource {
     }
 
     @Override
-    public void findAll(boolean hasNetworking, OnUserLoaded.OnFindAll data) {
-        if(hasNetworking) {
-            mUserRemoteDataSource.findAll(hasNetworking, data);
-        }
-        else {
-            mUserLocalDataSource.findAll(hasNetworking, data);
-        }
-    }
-
-    @Override
-    public void insert(User u) {
-        mUserLocalDataSource.insert(u);
-    }
-
-    @Override
-    public void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data) {
-        if(hasNetworking) {
-            mUserRemoteDataSource.findByEmail(hasNetworking, email, data);
-        }
-        else {
-            mUserLocalDataSource.findByEmail(hasNetworking, email, data);
+    public void findAll(boolean network, OnUserLoaded.OnFindAll data) {
+        if (network) {
+            mUserRemoteDataSource.findAll(network, data);
+        } else {
+            mUserLocalDataSource.findAll(network, data);
         }
     }
 
     @Override
-    public void findById(boolean hasNetworking, String id, OnUserLoaded.OnFindById data) {
-        if(hasNetworking) {
-            mUserRemoteDataSource.findById(hasNetworking, id, data);
-        }
-        else {
-            mUserLocalDataSource.findById(hasNetworking, id, data);
+    public void insert(boolean network, User u) {
+        if (network) {
+            mUserRemoteDataSource.insert(true, u);
+        } else {
+            mUserLocalDataSource.insert(false, u);
         }
     }
 
     @Override
-    public void update(boolean hasNetwork, User u) {
-        if(hasNetwork) {
+    public void findByEmail(boolean network, String email, OnUserLoaded.OnFindByEmail data) {
+        if (network) {
+            mUserRemoteDataSource.findByEmail(network, email, data);
+        } else {
+            mUserLocalDataSource.findByEmail(network, email, data);
+        }
+    }
+
+    @Override
+    public void findById(boolean network, String id, OnUserLoaded.OnFindById data) {
+        if (network) {
+            mUserRemoteDataSource.findById(network, id, data);
+        } else {
+            mUserLocalDataSource.findById(network, id, data);
+        }
+    }
+
+    @Override
+    public void update(boolean network, User u) {
+        if (network) {
             mUserRemoteDataSource.update(true, u);
         }
-        mUserLocalDataSource.update(hasNetwork, u);
+        mUserLocalDataSource.update(network, u);
     }
 
     @Override
-    public void findAllContactsByUserId(boolean hasNetwork, String id,
+    public void findAllContactsByUserId(boolean network, String id,
                                         OnUserLoaded.OnFindAllContactsByUserId data) {
-        if(hasNetwork) {
+
+        if (network) {
             mUserRemoteDataSource.findAllContactsByUserId(true, id, data);
-        }
-        else{
+        } else {
             mUserLocalDataSource.findAllContactsByUserId(false, id, data);
         }
     }

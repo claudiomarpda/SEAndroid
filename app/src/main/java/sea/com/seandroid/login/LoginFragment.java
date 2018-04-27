@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     @Override
     public void showLoginRejected() {
-        Toast.makeText(getContext(), "Login fail", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Login sem internet", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -19,10 +19,7 @@ public interface OnUserLoaded {
     }
 
     interface OnFindAllContactsByUserId {
-        void onFindAllContactsByUserId(List<User> users);
+        void onFindAllContactsByUserId(boolean fromNetwork, List<User> users);
     }
 
-    interface OnFindContactById {
-        void onFindContactById(User u);
-    }
 }

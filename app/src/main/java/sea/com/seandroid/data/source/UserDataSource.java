@@ -4,16 +4,16 @@ import sea.com.seandroid.data.model.User;
 
 public interface UserDataSource {
 
-    void findAll(boolean hasNetworking, OnUserLoaded.OnFindAll data);
+    void findAll(boolean network, OnUserLoaded.OnFindAll data);
 
-    void insert(User u);
+    void insert(boolean network, User u);
 
-    void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data);
+    void findByEmail(boolean network, String email, OnUserLoaded.OnFindByEmail data);
 
-    void findById(boolean hasNetworking, String id, OnUserLoaded.OnFindById data);
+    void findById(boolean network, String id, OnUserLoaded.OnFindById data);
 
-    void update(boolean hasNetwork, User u);
+    void update(boolean network, User u);
 
-    void findAllContactsByUserId(boolean hasNetwork, String id,
+    void findAllContactsByUserId(boolean network, String id,
                                  OnUserLoaded.OnFindAllContactsByUserId data);
 }

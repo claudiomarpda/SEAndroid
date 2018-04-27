@@ -1,16 +1,17 @@
 package sea.com.seandroid.data.source.local;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import sea.com.seandroid.data.model.Contact;
 import sea.com.seandroid.data.model.User;
-import sea.com.seandroid.data.source.UserDataSource;
 import sea.com.seandroid.data.source.OnUserLoaded;
+import sea.com.seandroid.data.source.UserDataSource;
 
 public class UserLocalDataSource implements UserDataSource {
 
@@ -36,7 +37,7 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void findAll(boolean hasNetworking, OnUserLoaded.OnFindAll data) {
+    public void findAll(boolean network, OnUserLoaded.OnFindAll data) {
         try {
             data.onFindAll(new FindAllUsersAsync().executeOnExecutor(executor).get());
         } catch (InterruptedException e) {
@@ -44,16 +45,15 @@ public class UserLocalDataSource implements UserDataSource {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.d("TAG", "findById all finished");
     }
 
     @Override
-    public void insert(User u) {
+    public void insert(boolean network, User u) {
         new InsertUserAsync().executeOnExecutor(executor, u);
     }
 
     @Override
-    public void findByEmail(boolean hasNetworking, String email, OnUserLoaded.OnFindByEmail data) {
+    public void findByEmail(boolean network, String email, OnUserLoaded.OnFindByEmail data) {
         try {
             data.onFindByEmail(
                     new FindUserByEmailAsync().executeOnExecutor(executor, email).get());
@@ -65,7 +65,7 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void findById(boolean hasNetworking, String id, OnUserLoaded.OnFindById data) {
+    public void findById(boolean network, String id, OnUserLoaded.OnFindById data) {
         try {
             data.onFindById(
                     new FindUserByIdAsync().executeOnExecutor(executor, id).get());
@@ -77,19 +77,27 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void update(boolean hasNetwork, User u) {
+    public void update(boolean network, User u) {
         new UpdateUserAsync().executeOnExecutor(executor, u);
     }
 
     @Override
-    public void findAllContactsByUserId(boolean hasNetwork, String id, OnUserLoaded.OnFindAllContactsByUserId data) {
-
+    public void findAllContactsByUserId(boolean network, String id,
+                                        OnUserLoaded.OnFindAllContactsByUserId data) {
+        try {
+            data.onFindAllContactsByUserId(network,
+                    new FindAllContactsByUserIdAsync().executeOnExecutor(executor, id).get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
+
 
     private static class FindAllUsersAsync extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
-            Log.d("TAG", "in background local");
             return userDao.findAll();
         }
     }
@@ -124,10 +132,32 @@ public class UserLocalDataSource implements UserDataSource {
         }
     }
 
-    private static class FindAllContactsByUserIdAsync extends AsyncTask<String, Void, Void> {
+    private static class FindAllContactsByUserIdAsync extends AsyncTask<String, Void, List<User>> {
+
+        private List<User> users = new ArrayList<>();
+
         @Override
-        protected Void doInBackground(String... strings) {
-            return null;
+        protected List<User> doInBackground(String... ids) {
+            User u = userDao.findById(ids[0]);
+
+            if (u == null) {
+                return users;
+            }
+
+            List<Contact> contacts = u.getContacts();
+
+            if (contacts == null) {
+                return users;
+            }
+
+            for (Contact c : contacts) {
+                User u1 = userDao.findById(c.getContactId());
+                if (u1 == null) {
+                    continue;
+                }
+                users.add(u1);
+            }
+            return users;
         }
     }
 }

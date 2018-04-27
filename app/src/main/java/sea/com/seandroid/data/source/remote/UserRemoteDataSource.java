@@ -29,7 +29,7 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void findAll(boolean hasNetworking, final OnUserLoaded.OnFindAll data) {
+    public void findAll(boolean network, final OnUserLoaded.OnFindAll data) {
         userClient.readAll().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -49,12 +49,12 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void insert(User u) {
+    public void insert(boolean network, User u) {
 
     }
 
     @Override
-    public void findByEmail(boolean hasNetworking, final String email, final OnUserLoaded.OnFindByEmail data) {
+    public void findByEmail(boolean network, final String email, final OnUserLoaded.OnFindByEmail data) {
         userClient.findByEmail(email).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -73,7 +73,7 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void findById(final boolean hasNetworking, String id, final OnUserLoaded.OnFindById data) {
+    public void findById(final boolean network, String id, final OnUserLoaded.OnFindById data) {
         userClient.findById(id).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -92,12 +92,12 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void update(boolean hasNetwork, User u) {
+    public void update(boolean network, User u) {
         userClient.update(u);
     }
 
     @Override
-    public void findAllContactsByUserId(boolean hasNetwork, String id,
+    public void findAllContactsByUserId(final boolean network, String id,
                                         final OnUserLoaded.OnFindAllContactsByUserId data) {
 
         userClient.findAllContactsByUserId(id).enqueue(new Callback<List<User>>() {
@@ -105,7 +105,7 @@ public class UserRemoteDataSource implements UserDataSource {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.isSuccessful()) {
                     if(response.body() != null) {
-                        data.onFindAllContactsByUserId(response.body());
+                        data.onFindAllContactsByUserId(network, response.body());
                     }
                 }
             }
