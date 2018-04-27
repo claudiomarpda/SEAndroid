@@ -15,7 +15,11 @@ public interface OnUserLoaded {
     }
 
     interface OnFindById {
-        void onFindById(boolean hasNetwork, User u);
+        void onFindById(User u);
+    }
+
+    interface OnFindAllContactsByUserId {
+        void onFindAllContactsByUserId(List<User> users);
     }
 
     interface OnFindContactById {

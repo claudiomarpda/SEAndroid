@@ -70,4 +70,14 @@ public class UserRepository implements UserDataSource {
         mUserLocalDataSource.update(hasNetwork, u);
     }
 
+    @Override
+    public void findAllContactsByUserId(boolean hasNetwork, String id,
+                                        OnUserLoaded.OnFindAllContactsByUserId data) {
+        if(hasNetwork) {
+            mUserRemoteDataSource.findAllContactsByUserId(true, id, data);
+        }
+        else{
+            mUserLocalDataSource.findAllContactsByUserId(false, id, data);
+        }
+    }
 }

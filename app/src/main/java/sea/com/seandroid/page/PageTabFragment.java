@@ -11,8 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import sea.com.seandroid.Injection;
 import sea.com.seandroid.R;
+import sea.com.seandroid.UserSession;
+import sea.com.seandroid.data.model.Contact;
+import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.page_contacts.PageContactsPresenter;
 import sea.com.seandroid.page_contacts.PageContactsFragment;
 

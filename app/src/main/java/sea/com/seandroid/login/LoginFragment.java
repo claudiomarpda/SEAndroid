@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import sea.com.seandroid.R;
+import sea.com.seandroid.UserSession;
 import sea.com.seandroid.page.PageActivity;
 import sea.com.seandroid.util.ActivityUtils;
 
@@ -46,14 +47,20 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(UserSession.user != null) {
+                    showLoginAccepted();
+                }
+
                 mLoginPresenter.attemptLogin(
                         ActivityUtils.hasNetwork(getContext()),
-                        "example3@email.com");
+                        "example1@email.com");
+
             }
         });
 
-        if(mLoginPresenter != null) {
-            mLoginPresenter.start();
+        if(UserSession.user != null) {
+            showLoginAccepted();
         }
 
         return view;

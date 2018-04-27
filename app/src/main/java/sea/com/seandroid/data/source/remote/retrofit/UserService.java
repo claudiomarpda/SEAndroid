@@ -22,4 +22,7 @@ public interface UserService {
 
     @PUT("{user}")
     void update(@Body User u);
+
+    @GET("{userId}/contacts")
+    Call<List<User>> findAllContactsByUserId(@Path("userId") String userId);
 }

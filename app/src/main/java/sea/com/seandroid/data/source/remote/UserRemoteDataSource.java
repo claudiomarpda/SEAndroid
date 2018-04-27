@@ -79,7 +79,7 @@ public class UserRemoteDataSource implements UserDataSource {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()) {
                     if(response.body() != null) {
-                        data.onFindById(hasNetworking, response.body());
+                        data.onFindById(response.body());
                     }
                 }
             }
@@ -94,6 +94,27 @@ public class UserRemoteDataSource implements UserDataSource {
     @Override
     public void update(boolean hasNetwork, User u) {
         userClient.update(u);
+    }
+
+    @Override
+    public void findAllContactsByUserId(boolean hasNetwork, String id,
+                                        final OnUserLoaded.OnFindAllContactsByUserId data) {
+
+        userClient.findAllContactsByUserId(id).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if(response.isSuccessful()) {
+                    if(response.body() != null) {
+                        data.onFindAllContactsByUserId(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
 
 }

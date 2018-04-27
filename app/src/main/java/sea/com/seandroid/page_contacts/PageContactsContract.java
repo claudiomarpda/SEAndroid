@@ -12,7 +12,7 @@ public interface PageContactsContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showList(List<Contact> contacts);
+        void showList(List<User> contacts);
 
         void showItemDetail(android.view.View view, int position);
 
@@ -20,7 +20,7 @@ public interface PageContactsContract {
 
     interface Presenter extends BasePresenter {
 
-        void findUserById(boolean hasNetwork, String id);
+        void findAllContactsByUserId(boolean hasNetwork, String id);
 
         void onItemSelected(android.view.View view, int position);
     }

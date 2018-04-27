@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -63,7 +64,13 @@ public class SearchFragment extends Fragment implements SearchContract.View {
             @Override
             public void onClick(View view) {
                 boolean hasNetworking = ActivityUtils.hasNetwork(getContext());
-                mSearchPresenter.findUsers(hasNetworking);
+                if(hasNetworking) {
+                    mSearchPresenter.findUsers(true);
+                }
+                else {
+                    Toast.makeText(getContext(),
+                            "Verifique sua internet", Toast.LENGTH_LONG).show();
+                }
             }
         });
         return root;

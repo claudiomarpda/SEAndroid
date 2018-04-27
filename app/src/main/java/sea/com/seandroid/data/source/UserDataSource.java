@@ -14,4 +14,6 @@ public interface UserDataSource {
 
     void update(boolean hasNetwork, User u);
 
+    void findAllContactsByUserId(boolean hasNetwork, String id,
+                                 OnUserLoaded.OnFindAllContactsByUserId data);
 }

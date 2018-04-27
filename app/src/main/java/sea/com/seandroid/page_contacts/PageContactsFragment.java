@@ -1,7 +1,6 @@
 package sea.com.seandroid.page_contacts;
 
 
-import android.media.MediaCas;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.UserSession;
-import sea.com.seandroid.data.model.Contact;
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.util.ActivityUtils;
 
@@ -51,7 +47,7 @@ public class PageContactsFragment extends Fragment implements PageContactsContra
         if (mContactPresenter != null) {
 //            mContactPresenter.start();
 
-            mContactPresenter.findUserById(
+            mContactPresenter.findAllContactsByUserId(
                     ActivityUtils.hasNetwork(getContext()), UserSession.user.getId());
 
         } else {
@@ -68,7 +64,7 @@ public class PageContactsFragment extends Fragment implements PageContactsContra
     }
 
     @Override
-    public void showList(List<Contact> contacts) {
+    public void showList(List<User> contacts) {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
 
@@ -77,7 +73,7 @@ public class PageContactsFragment extends Fragment implements PageContactsContra
             adapter = new PageContactsAdapter(mContactPresenter, contacts);
         } else {
             Log.d("TAG", "contact list null | " + getClass().getSimpleName());
-            adapter = new PageContactsAdapter(mContactPresenter, Collections.<Contact>emptyList());
+            adapter = new PageContactsAdapter(mContactPresenter, Collections.<User>emptyList());
         }
         mRecyclerView.setAdapter(adapter);
     }

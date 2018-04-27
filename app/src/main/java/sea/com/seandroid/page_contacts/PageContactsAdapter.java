@@ -13,13 +13,14 @@ import java.util.List;
 
 import sea.com.seandroid.R;
 import sea.com.seandroid.data.model.Contact;
+import sea.com.seandroid.data.model.User;
 
 public class PageContactsAdapter extends RecyclerView.Adapter<PageContactsAdapter.ContactsViewHolder> {
 
-    private List<Contact> contactList;
+    private List<User> contactList;
     private PageContactsContract.Presenter mContactPresenter;
 
-    public PageContactsAdapter(PageContactsContract.Presenter p, List<Contact> list) {
+    public PageContactsAdapter(PageContactsContract.Presenter p, List<User> list) {
         mContactPresenter = p;
         this.contactList = list;
     }
@@ -35,7 +36,7 @@ public class PageContactsAdapter extends RecyclerView.Adapter<PageContactsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PageContactsAdapter.ContactsViewHolder holder, int position) {
-        String id = contactList.get(position).getContactId();
+        String id = contactList.get(position).getFirstName();
         holder.wFirstName.setText(id);
 //        holder.wImage.setImageBitmap();
     }

@@ -67,7 +67,7 @@ public class UserLocalDataSource implements UserDataSource {
     @Override
     public void findById(boolean hasNetworking, String id, OnUserLoaded.OnFindById data) {
         try {
-            data.onFindById(hasNetworking,
+            data.onFindById(
                     new FindUserByIdAsync().executeOnExecutor(executor, id).get());
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -79,6 +79,11 @@ public class UserLocalDataSource implements UserDataSource {
     @Override
     public void update(boolean hasNetwork, User u) {
         new UpdateUserAsync().executeOnExecutor(executor, u);
+    }
+
+    @Override
+    public void findAllContactsByUserId(boolean hasNetwork, String id, OnUserLoaded.OnFindAllContactsByUserId data) {
+
     }
 
     private static class FindAllUsersAsync extends AsyncTask<Void, Void, List<User>> {
@@ -115,6 +120,13 @@ public class UserLocalDataSource implements UserDataSource {
         @Override
         protected Void doInBackground(User... users) {
             userDao.update(users[0]);
+            return null;
+        }
+    }
+
+    private static class FindAllContactsByUserIdAsync extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... strings) {
             return null;
         }
     }
