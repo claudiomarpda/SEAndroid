@@ -5,9 +5,9 @@ import android.view.View;
 import java.util.List;
 
 import sea.com.seandroid.data.model.User;
-import sea.com.seandroid.data.source.remote.OnUserLoaded;
+import sea.com.seandroid.data.source.OnUserLoaded;
 
-public class ResultPresenter implements ResultContract.Presenter, OnUserLoaded.OnReadAll {
+public class ResultPresenter implements ResultContract.Presenter, OnUserLoaded.OnFindAll {
 
     private ResultContract.View mResultView;
     private List<User> userList;

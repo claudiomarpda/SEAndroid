@@ -1,13 +1,12 @@
 package sea.com.seandroid.data.source.remote;
 
-import android.util.Log;
-
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sea.com.seandroid.data.model.User;
+import sea.com.seandroid.data.source.OnUserLoaded;
 import sea.com.seandroid.data.source.UserDataSource;
 import sea.com.seandroid.data.source.remote.retrofit.APIClient;
 import sea.com.seandroid.data.source.remote.retrofit.UserService;
@@ -30,7 +29,7 @@ public class UserRemoteDataSource implements UserDataSource {
     }
 
     @Override
-    public void findAll(boolean hasNetworking, final OnUserLoaded.OnReadAll data) {
+    public void findAll(boolean hasNetworking, final OnUserLoaded.OnFindAll data) {
         userClient.readAll().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -71,6 +70,30 @@ public class UserRemoteDataSource implements UserDataSource {
                 call.cancel();
             }
         });
+    }
+
+    @Override
+    public void findById(final boolean hasNetworking, String id, final OnUserLoaded.OnFindById data) {
+        userClient.findById(id).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) {
+                    if(response.body() != null) {
+                        data.onFindById(hasNetworking, response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                call.cancel();
+            }
+        });
+    }
+
+    @Override
+    public void update(boolean hasNetwork, User u) {
+        userClient.update(u);
     }
 
 }

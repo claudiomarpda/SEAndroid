@@ -16,7 +16,7 @@ public interface SearchContract {
 
     interface Presenter extends BasePresenter {
 
-        void searchUsers(boolean hasNetworking);
+        void findUsers(boolean hasNetworking);
 
     }
 }

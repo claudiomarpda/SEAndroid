@@ -1,4 +1,4 @@
-package sea.com.seandroid.util;
+package sea.com.seandroid.util.converter;
 
 import android.arch.persistence.room.TypeConverter;
 
@@ -9,27 +9,26 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-import sea.com.seandroid.data.model.ContactRequest;
+import sea.com.seandroid.data.model.Contact;
 
-public class ContactRequestTypeConverter {
+public class ContactTypeConverter {
 
     private static Gson gson = new Gson();
 
     @TypeConverter
-    public static List<ContactRequest> stringToObjectList(String data) {
+    public static List<Contact> stringToObjectList(String data) {
         if (data == null) {
             return Collections.emptyList();
         }
 
-        Type listType = new TypeToken<List<ContactRequest>>() {
+        Type listType = new TypeToken<List<Contact>>() {
         }.getType();
 
         return gson.fromJson(data, listType);
     }
 
     @TypeConverter
-    public static String objectListToString(List<ContactRequest> list) {
+    public static String objectListToString(List<Contact> list) {
         return gson.toJson(list);
     }
-
 }

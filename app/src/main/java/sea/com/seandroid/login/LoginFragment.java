@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             public void onClick(View view) {
                 mLoginPresenter.attemptLogin(
                         ActivityUtils.hasNetwork(getContext()),
-                        "example@email.com");
+                        "example3@email.com");
             }
         });
 

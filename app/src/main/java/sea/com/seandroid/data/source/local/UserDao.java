@@ -17,7 +17,7 @@ public interface UserDao extends PersonDao {
     void insert(User u);
 
     @Query("SELECT * FROM user WHERE id IN (:id)")
-    User read(String id);
+    User findById(String id);
 
     @Update
     void update(User u);
@@ -26,7 +26,7 @@ public interface UserDao extends PersonDao {
     void delete(User user);
 
     @Query("SELECT * FROM user")
-    List<User> readAll();
+    List<User> findAll();
 
     @Query("SELECT * FROM user WHERE id in (:email)")
     User findByEmail(String email);

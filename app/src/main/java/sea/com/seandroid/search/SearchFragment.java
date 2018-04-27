@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
             @Override
             public void onClick(View view) {
                 boolean hasNetworking = ActivityUtils.hasNetwork(getContext());
-                mSearchPresenter.searchUsers(hasNetworking);
+                mSearchPresenter.findUsers(hasNetworking);
             }
         });
         return root;

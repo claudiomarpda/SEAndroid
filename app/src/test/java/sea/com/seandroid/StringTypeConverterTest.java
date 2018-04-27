@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import sea.com.seandroid.util.StringTypeConverter;
+import sea.com.seandroid.util.converter.StringTypeConverter;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;

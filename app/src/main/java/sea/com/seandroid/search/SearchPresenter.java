@@ -6,9 +6,9 @@ import java.util.List;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
-import sea.com.seandroid.data.source.remote.OnUserLoaded;
+import sea.com.seandroid.data.source.OnUserLoaded;
 
-public class SearchPresenter implements SearchContract.Presenter, OnUserLoaded.OnReadAll {
+public class SearchPresenter implements SearchContract.Presenter, OnUserLoaded.OnFindAll {
 
     private final SearchContract.View mSearchView;
     private UserDataSource userDataSource;
@@ -31,7 +31,7 @@ public class SearchPresenter implements SearchContract.Presenter, OnUserLoaded.O
 
 
     @Override
-    public void searchUsers(boolean hasNetworking) {
+    public void findUsers(boolean hasNetworking) {
         userDataSource.findAll(hasNetworking, this);
     }
 

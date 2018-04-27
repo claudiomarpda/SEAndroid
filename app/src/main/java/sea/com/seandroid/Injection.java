@@ -17,6 +17,7 @@ public class Injection {
         }
 
         SEADatabase database = SEADatabase.getInstance(context);
+
         return UserRepository.getInstance(UserRemoteDataSource.getInstance(),
                 UserLocalDataSource.getInstance(database.userDao()));
     }

@@ -9,10 +9,10 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import sea.com.seandroid.util.ContactRequestTypeConverter;
-import sea.com.seandroid.util.ContactTypeConverter;
-import sea.com.seandroid.util.KnowledgeTypeConverter;
-import sea.com.seandroid.util.StringTypeConverter;
+import sea.com.seandroid.util.converter.ContactRequestTypeConverter;
+import sea.com.seandroid.util.converter.ContactTypeConverter;
+import sea.com.seandroid.util.converter.KnowledgeTypeConverter;
+import sea.com.seandroid.util.converter.StringTypeConverter;
 
 @Entity(tableName = "user")
 public class User extends Person {

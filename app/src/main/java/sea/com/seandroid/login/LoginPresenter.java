@@ -3,7 +3,7 @@ package sea.com.seandroid.login;
 import sea.com.seandroid.UserSession;
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
-import sea.com.seandroid.data.source.remote.OnUserLoaded;
+import sea.com.seandroid.data.source.OnUserLoaded;
 
 public class LoginPresenter implements LoginContract.Presenter, OnUserLoaded.OnFindByEmail {
 

@@ -2,28 +2,42 @@ package sea.com.seandroid.data.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import sea.com.seandroid.util.converter.ContactRequestStatusTypeConverter;
 
 @Entity(tableName = "contact_request")
 public class ContactRequest {
 
     public enum Status {
-        PENDING, ACCEPTED, REJECTED
+        PENDING(0), ACCEPTED(1), REJECTED(2);
+
+        private int code;
+
+        Status(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
     }
 
+    @NonNull
     @PrimaryKey
     private String id;
     @NonNull
     private String fromUserId;
     @NonNull
     private String toUserId;
+
     @Nullable
+    @TypeConverters(ContactRequestStatusTypeConverter.class)
     private Status status;
 
-
-    public ContactRequest() {
-    }
 
     /**
      * Use this constructor for existent instances from remote or local data source
@@ -62,6 +76,7 @@ public class ContactRequest {
     }
 
     @Nullable
+    @TypeConverter
     public Status getStatus() {
         return status;
     }

@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import sea.com.seandroid.Injection;
 import sea.com.seandroid.R;
+import sea.com.seandroid.page_contacts.PageContactsPresenter;
+import sea.com.seandroid.page_contacts.PageContactsFragment;
 
 public class PageTabFragment extends Fragment {
 
@@ -46,7 +49,15 @@ public class PageTabFragment extends Fragment {
         mTabLayout = root.findViewById(R.id.page_tab_layout);
 
         mPagesAdapter = new PageAdapter(getChildFragmentManager());
-        mPagesAdapter.addFragment(PageContactsFragment.newInstance());
+
+        // Page Contacts
+        PageContactsFragment contactsFragment = PageContactsFragment.newInstance();
+        PageContactsPresenter contactPresenter = new PageContactsPresenter(
+                contactsFragment, Injection.provideUserRepository(getContext()
+        ));
+        contactsFragment.setPresenter(contactPresenter);
+        mPagesAdapter.addFragment(contactsFragment);
+
         mPagesAdapter.addFragment(PageNotificationFragment.newInstance());
         mPagesAdapter.addFragment(PageProfileFragment.newInstance());
 

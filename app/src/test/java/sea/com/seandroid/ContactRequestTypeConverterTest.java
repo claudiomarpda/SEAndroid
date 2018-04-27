@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import sea.com.seandroid.data.model.ContactRequest;
-import sea.com.seandroid.util.ContactRequestTypeConverter;
+import sea.com.seandroid.util.converter.ContactRequestTypeConverter;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;

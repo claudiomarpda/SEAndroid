@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="12dp">
+
+    <ImageView
+        android:id="@+id/page_contacts_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:text="Example"
+        android:textColorLink="@color/primary_text"
+        android:id="@+id/page_contacts_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -50,18 +50,18 @@ public class UserDaoTest {
     @Test
     public void createAndReadUserShouldSucceed() {
         mUserDao.insert(user);
-        User u = mUserDao.read("id01");
+        User u = mUserDao.findById("id01");
         assertEquals(u.getFirstName(), user.getFirstName());
     }
 
     @Test
     public void updateShouldSucceed() {
         mUserDao.insert(user);
-        assertEquals(mUserDao.read("id01").getFirstName(), user.getFirstName());
+        assertEquals(mUserDao.findById("id01").getFirstName(), user.getFirstName());
         user.setFirstName("updated name");
         mUserDao.update(user);
 
-        User u = mUserDao.read("id01");
+        User u = mUserDao.findById("id01");
         assertEquals(u.getFirstName(), user.getFirstName());
         assertEquals(u.getFirstName(), "updated name");
     }
@@ -69,10 +69,10 @@ public class UserDaoTest {
     @Test
     public void deleteShouldSucceed() {
         mUserDao.insert(user);
-        User u = mUserDao.read("id01");
+        User u = mUserDao.findById("id01");
         assertEquals(u.getFirstName(), user.getFirstName());
         mUserDao.delete(user);
-        assertNull(mUserDao.read("id01"));
+        assertNull(mUserDao.findById("id01"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class UserDaoTest {
         user.setKnowledgeList(Arrays.asList(k1, k2));
         mUserDao.insert(user);
 
-        User u = mUserDao.read("id01");
+        User u = mUserDao.findById("id01");
         assertNotNull(u.getKnowledgeList());
 
         assertEquals(user.getKnowledgeList().get(0).getId(), "k01");

@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 import sea.com.seandroid.data.model.User;
 import sea.com.seandroid.data.source.UserDataSource;
-import sea.com.seandroid.data.source.remote.OnUserLoaded;
+import sea.com.seandroid.data.source.OnUserLoaded;
 
 public class UserLocalDataSource implements UserDataSource {
 
@@ -36,7 +36,7 @@ public class UserLocalDataSource implements UserDataSource {
     }
 
     @Override
-    public void findAll(boolean hasNetworking, OnUserLoaded.OnReadAll data) {
+    public void findAll(boolean hasNetworking, OnUserLoaded.OnFindAll data) {
         try {
             data.onFindAll(new FindAllUsersAsync().executeOnExecutor(executor).get());
         } catch (InterruptedException e) {
@@ -44,7 +44,7 @@ public class UserLocalDataSource implements UserDataSource {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.d("TAG", "read all finished");
+        Log.d("TAG", "findById all finished");
     }
 
     @Override
@@ -64,11 +64,28 @@ public class UserLocalDataSource implements UserDataSource {
         }
     }
 
+    @Override
+    public void findById(boolean hasNetworking, String id, OnUserLoaded.OnFindById data) {
+        try {
+            data.onFindById(hasNetworking,
+                    new FindUserByIdAsync().executeOnExecutor(executor, id).get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(boolean hasNetwork, User u) {
+        new UpdateUserAsync().executeOnExecutor(executor, u);
+    }
+
     private static class FindAllUsersAsync extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... voids) {
             Log.d("TAG", "in background local");
-            return userDao.readAll();
+            return userDao.findAll();
         }
     }
 
@@ -84,6 +101,21 @@ public class UserLocalDataSource implements UserDataSource {
         @Override
         protected User doInBackground(String... strings) {
             return userDao.findByEmail(strings[0]);
+        }
+    }
+
+    private static class FindUserByIdAsync extends AsyncTask<String, Void, User> {
+        @Override
+        protected User doInBackground(String... strings) {
+            return userDao.findById(strings[0]);
+        }
+    }
+
+    private static class UpdateUserAsync extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            userDao.update(users[0]);
+            return null;
         }
     }
 }

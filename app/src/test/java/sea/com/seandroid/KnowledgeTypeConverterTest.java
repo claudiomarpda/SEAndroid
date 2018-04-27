@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import sea.com.seandroid.data.model.Knowledge;
-import sea.com.seandroid.util.KnowledgeTypeConverter;
+import sea.com.seandroid.util.converter.KnowledgeTypeConverter;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;

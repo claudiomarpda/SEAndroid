@@ -1,4 +1,4 @@
-package sea.com.seandroid.util;
+package sea.com.seandroid.util.converter;
 
 import android.arch.persistence.room.TypeConverter;
 
