@@ -5,7 +5,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sea.com.seandroid.data.model.Knowledge;
 import sea.com.seandroid.data.model.User;
+import sea.com.seandroid.data.source.OnKnowledgeLoaded;
 import sea.com.seandroid.data.source.OnUserLoaded;
 import sea.com.seandroid.data.source.UserDataSource;
 import sea.com.seandroid.data.source.remote.retrofit.APIClient;
@@ -58,8 +60,8 @@ public class UserRemoteDataSource implements UserDataSource {
         userClient.findByEmail(email).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() != null) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         data.onFindByEmail(response.body());
                     }
                 }
@@ -77,8 +79,8 @@ public class UserRemoteDataSource implements UserDataSource {
         userClient.findById(id).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() != null) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         data.onFindById(response.body());
                     }
                 }
@@ -103,8 +105,8 @@ public class UserRemoteDataSource implements UserDataSource {
         userClient.findAllContactsByUserId(id).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() != null) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         data.onFindAllContactsByUserId(network, response.body());
                     }
                 }
@@ -117,4 +119,22 @@ public class UserRemoteDataSource implements UserDataSource {
         });
     }
 
+    @Override
+    public void findAllKnowledgeByUserId(boolean network, String id, final OnKnowledgeLoaded data) {
+        userClient.findAllKnowledgeByUserId(id).enqueue(new Callback<List<Knowledge>>() {
+            @Override
+            public void onResponse(Call<List<Knowledge>> call, Response<List<Knowledge>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        data.onFindAll(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Knowledge>> call, Throwable t) {
+                call.cancel();
+            }
+        });
+    }
 }

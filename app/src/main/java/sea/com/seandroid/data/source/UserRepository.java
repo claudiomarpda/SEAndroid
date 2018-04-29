@@ -82,4 +82,13 @@ public class UserRepository implements UserDataSource {
             mUserLocalDataSource.findAllContactsByUserId(false, id, data);
         }
     }
+
+    @Override
+    public void findAllKnowledgeByUserId(boolean network, String id, OnKnowledgeLoaded data) {
+
+        if(network) {
+            mUserRemoteDataSource.findAllKnowledgeByUserId(true, id, data);
+        }
+
+    }
 }

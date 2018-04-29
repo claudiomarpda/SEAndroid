@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import sea.com.seandroid.data.model.Knowledge;
 import sea.com.seandroid.data.model.User;
 
 public interface UserService {
@@ -25,4 +26,7 @@ public interface UserService {
 
     @GET("{userId}/contacts")
     Call<List<User>> findAllContactsByUserId(@Path("userId") String userId);
+
+    @GET("{userId}/knowledge")
+    Call<List<Knowledge>> findAllKnowledgeByUserId(@Path("userId") String userId);
 }
