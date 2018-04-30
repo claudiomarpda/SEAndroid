@@ -10,13 +10,13 @@ public interface PageProfileContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showProfileKnowledge(List<Knowledge> knowledgeList);
+        void showKnowledge(List<Knowledge> knowledgeList);
 
     }
 
     interface Presenter extends BasePresenter {
 
-        void findProfileKnowledge(boolean network);
+        void findKnowledge();
 
     }
 }

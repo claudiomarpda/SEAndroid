@@ -32,6 +32,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".profile_knowledge.ProfileKnowledgeActivity"
+            android:label="@string/title_activity_profile_knowledge"
+            android:parentActivityName=".page.PageActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sea.com.seandroid.page.PageActivity" />
+        </activity>
     </application>
 
 </manifest>

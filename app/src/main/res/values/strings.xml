@@ -25,5 +25,7 @@
     <string name="page_profile_knowledge">Conhecimentos</string>
     <string name="page_profile_locations">Lugares</string>
     <string name="page_profile_preferences">Preferências</string>
+    <string name="title_activity_profile_knowledge">ProfileKnowledgeActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package sea.com.seandroid.page_profile;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
 import sea.com.seandroid.R;
 import sea.com.seandroid.UserSession;
 import sea.com.seandroid.data.model.Knowledge;
+import sea.com.seandroid.profile_knowledge.ProfileKnowledgeActivity;
 import sea.com.seandroid.util.ActivityUtils;
 
 public class PageProfileFragment extends Fragment implements PageProfileContract.View {
@@ -49,9 +51,8 @@ public class PageProfileFragment extends Fragment implements PageProfileContract
             @Override
             public void onClick(View view) {
                 if (mProfilePresenter != null) {
-                    mProfilePresenter.findProfileKnowledge(ActivityUtils.hasNetwork(getContext()));
+                    mProfilePresenter.findKnowledge();
                 }
-                Toast.makeText(getContext(), "conhecimentoooos", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -64,7 +65,8 @@ public class PageProfileFragment extends Fragment implements PageProfileContract
     }
 
     @Override
-    public void showProfileKnowledge(List<Knowledge> knowledgeList) {
-        // TODO: Start knowledge activity
+    public void showKnowledge(List<Knowledge> knowledgeList) {
+        Intent i = new Intent(getActivity(), ProfileKnowledgeActivity.class);
+        startActivity(i);
     }
 }

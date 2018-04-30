@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 
 import sea.com.seandroid.data.model.Contact;
 import sea.com.seandroid.data.model.User;
-import sea.com.seandroid.data.source.OnKnowledgeLoaded;
 import sea.com.seandroid.data.source.OnUserLoaded;
 import sea.com.seandroid.data.source.UserDataSource;
 
@@ -93,11 +92,6 @@ public class UserLocalDataSource implements UserDataSource {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void findAllKnowledgeByUserId(boolean network, String id, OnKnowledgeLoaded data) {
-
     }
 
 

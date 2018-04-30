@@ -17,5 +17,4 @@ public interface UserDataSource {
     void findAllContactsByUserId(boolean network, String id,
                                  OnUserLoaded.OnFindAllContactsByUserId data);
 
-    void findAllKnowledgeByUserId(boolean network, String id, OnKnowledgeLoaded data);
 }

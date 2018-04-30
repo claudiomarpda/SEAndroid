@@ -83,12 +83,4 @@ public class UserRepository implements UserDataSource {
         }
     }
 
-    @Override
-    public void findAllKnowledgeByUserId(boolean network, String id, OnKnowledgeLoaded data) {
-
-        if(network) {
-            mUserRemoteDataSource.findAllKnowledgeByUserId(true, id, data);
-        }
-
-    }
 }

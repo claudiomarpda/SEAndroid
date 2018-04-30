@@ -27,6 +27,4 @@ public interface UserService {
     @GET("{userId}/contacts")
     Call<List<User>> findAllContactsByUserId(@Path("userId") String userId);
 
-    @GET("{userId}/knowledge")
-    Call<List<Knowledge>> findAllKnowledgeByUserId(@Path("userId") String userId);
 }

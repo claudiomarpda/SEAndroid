@@ -16,6 +16,7 @@ import sea.com.seandroid.R;
 import sea.com.seandroid.page_contacts.PageContactsPresenter;
 import sea.com.seandroid.page_contacts.PageContactsFragment;
 import sea.com.seandroid.page_profile.PageProfileFragment;
+import sea.com.seandroid.page_profile.PageProfilePresenter;
 
 public class PageTabFragment extends Fragment {
 
@@ -51,16 +52,28 @@ public class PageTabFragment extends Fragment {
 
         mPagesAdapter = new PageAdapter(getChildFragmentManager());
 
+
         // Page Contacts
         PageContactsFragment contactsFragment = PageContactsFragment.newInstance();
         PageContactsPresenter contactPresenter = new PageContactsPresenter(
-                contactsFragment, Injection.provideUserRepository(getContext()
-        ));
+                contactsFragment, Injection.provideUserRepository(getContext())
+        );
         contactsFragment.setPresenter(contactPresenter);
         mPagesAdapter.addFragment(contactsFragment);
 
+
+        // Page Notification
         mPagesAdapter.addFragment(PageNotificationFragment.newInstance());
-        mPagesAdapter.addFragment(PageProfileFragment.newInstance());
+
+
+        // Page Profile
+        PageProfileFragment profileFragment = PageProfileFragment.newInstance();
+        PageProfilePresenter profilePresenter = new PageProfilePresenter(
+                profileFragment, Injection.provideUserRepository(getContext())
+        );
+        profileFragment.setPresenter(profilePresenter);
+        mPagesAdapter.addFragment(profileFragment);
+
 
         mViewPager.setAdapter(mPagesAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
